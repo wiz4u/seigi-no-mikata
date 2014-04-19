@@ -1,0 +1,28 @@
+
+$bg-color: #333;
+$thing-bg-color: #0f0;
+
+
+#field {
+    width: 480px;
+    height: 640px;
+
+    position: relative;
+
+    background-color: $bg-color;
+}
+
+.thing {
+    width: 64px;
+    height: 64px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background-color: $thing-bg-color;
+
+    &-invisible {
+        visibility: hidden;
+    }
+}
