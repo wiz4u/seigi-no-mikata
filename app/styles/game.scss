@@ -21,4 +21,8 @@ $thing-bg-color: #0f0;
     left: 0;
 
     background-color: $thing-bg-color;
+
+    &-invisible {
+        visibility: hidden;
+    }
 }

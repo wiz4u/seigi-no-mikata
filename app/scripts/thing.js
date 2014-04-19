@@ -4,6 +4,7 @@
     var Thing = function (parentElment) {
         var element = document.createElement('div');
         element.classList.add('thing');
+        element.classList.add('thing-invisible');
 
         this.element = element;
 
