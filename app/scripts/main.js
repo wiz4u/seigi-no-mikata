@@ -15,6 +15,12 @@
 
             this.things.push(thing);
         }
+
+        Main.tick(0);
+    };
+
+    Main.tick = function (time) {
+        window.requestAnimationFrame(Main.tick);
     };
 
     window.Main = Main;
