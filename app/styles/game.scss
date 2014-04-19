@@ -1,5 +1,6 @@
 
 $bg-color: #333;
+$thing-bg-color: #0f0;
 
 
 #field {
@@ -7,4 +8,11 @@ $bg-color: #333;
     height: 640px;
 
     background-color: $bg-color;
+}
+
+.thing {
+    width: 64px;
+    height: 64px;
+
+    background-color: $thing-bg-color;
 }
