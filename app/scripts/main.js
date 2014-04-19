@@ -1,3 +1,5 @@
+/* global Thing */
+
 (function (document, window) {
     'use strict';
 
@@ -10,6 +12,7 @@
 
         for (var i = 0; i < Thing.MAX_NUMBER; i++) {
             var thing = new Thing(this.field);
+
             this.things.push(thing);
         }
     };
