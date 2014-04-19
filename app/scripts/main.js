@@ -8,18 +8,28 @@
 
         this.field = document.getElementById('field');
 
-        this.things = [];
-
         for (var i = 0; i < Thing.MAX_NUMBER; i++) {
-            var thing = new Thing(this.field);
-
-            this.things.push(thing);
+            new Thing(this.field);
         }
 
         Main.tick(0);
     };
 
+    Main.DURATION = 1000;
+    Main.durationIndex = null;
+
     Main.tick = function (time) {
+        var t = Math.floor(time / Main.DURATION);
+        if (t !== Main.durationIndex) {
+            Main.durationIndex = t;
+
+            var thing = Thing.getInactiveThing();
+            if (thing) {
+                thing.setPosition(t * 10, t * 10);
+                thing.activate(true);
+            }
+        }
+
         window.requestAnimationFrame(Main.tick);
     };
 
