@@ -14,6 +14,12 @@
 
     Thing.MAX_NUMBER = 64;
 
+    Thing.prototype.setPosition = function(x, y) {
+        var style = this.element.style;
+        style.left = x + 'px';
+        style.top = y + 'px';
+    };
+
     window.Thing = Thing;
 
 })(document, window);
