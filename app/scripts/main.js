@@ -41,8 +41,8 @@
     };
 
     Main.startAnimation = function (thing, time) {
-        var x = (time * 10) % Main.fieldWidth;
-        var y = 0;
+        var x = ((time & 1) ? 0.3 : 0.7) * Main.fieldWidth;
+        var y = 40;
         var z = 0;
         thing.startAnimation(x, y, z, x, y, z + 1000, function () {
             // thing.activate(false);

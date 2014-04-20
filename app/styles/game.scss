@@ -1,7 +1,11 @@
 
 $bg-color: #333;
+
+$thing-width: 64px;
+$thing-height: 64px;
 $thing-bg-color: #0f0;
 $thing-border-color: #000;
+
 
 #field {
     width: 480px;
@@ -17,12 +21,12 @@ $thing-border-color: #000;
 }
 
 .thing {
-    width: 64px;
-    height: 64px;
+    width: $thing-width;
+    height: $thing-height;
 
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -($thing-width / 2);
+    left: -($thing-height / 2);
 
     background-color: $thing-bg-color;
     border: solid 1px $thing-border-color;
