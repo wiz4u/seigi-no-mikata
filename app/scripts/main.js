@@ -44,7 +44,7 @@
         var x = (time * 10) % Main.fieldWidth;
         var y = 0;
         var z = 0;
-        thing.startAnimation(x, y, z, x, y + 100, z + 1000, function () {
+        thing.startAnimation(x, y, z, x, y, z + 1000, function () {
             // thing.activate(false);
         });
 
