@@ -22,6 +22,8 @@ $thing-bg-color: #0f0;
 
     background-color: $thing-bg-color;
 
+    transition: all 0.5s ease-in-out;
+
     &-invisible {
         visibility: hidden;
     }
