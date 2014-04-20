@@ -96,11 +96,21 @@
         });
     };
 
-    Thing.prototype.enableClick = function(flag) {
-        if (flag) {
-            this.element.classList.add('thing-clickable');
+    Thing.prototype.enableClick = function(clickable) {
+        var element = this.element;
+        if (clickable) {
+            element.classList.add('thing-clickable');
+
+            element.addEventListener('click', function () {
+                element.classList.remove('thing-clickable');
+                element.classList.add('thing-clicked');
+            });
         } else {
-            this.element.classList.remove('thing-clickable');
+            element.classList.remove('thing-clickable');
+
+            element.addEventListener('click', function () {
+                element.classList.add('thing-missed');
+            });
         }
     };
 

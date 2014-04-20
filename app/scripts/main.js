@@ -43,9 +43,8 @@
     };
 
     Main.startAnimation = function (thing, time) {
-        if (Math.random() < Main.clickablePercentage) {
-            thing.enableClick(true);
-        }
+        var clickable = Math.random() < Main.clickablePercentage;
+        thing.enableClick(clickable);
 
         var x = ((time & 1) ? 0.3 : 0.7) * Main.fieldWidth;
         var y = 40;
