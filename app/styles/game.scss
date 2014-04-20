@@ -1,6 +1,13 @@
 
 $bg-color: #333;
+
+$thing-width: 64px;
+$thing-height: 64px;
 $thing-bg-color: #0f0;
+$thing-clickable-bg-color: #f00;
+$thing-clicked-bg-color: #0ff;
+$thing-missed-bg-color: #ff0;
+$thing-border-color: #000;
 
 
 #field {
@@ -10,19 +17,40 @@ $thing-bg-color: #0f0;
     position: relative;
 
     background-color: $bg-color;
+
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    perspective-origin: 50% -50%;
 }
 
 .thing {
-    width: 64px;
-    height: 64px;
+    width: $thing-width;
+    height: $thing-height;
 
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -($thing-width / 2);
+    left: -($thing-height / 2);
 
     background-color: $thing-bg-color;
+    border: solid 1px $thing-border-color;
+
+    transition: transform 4s linear;
 
     &-invisible {
         visibility: hidden;
+    }
+
+    &-clickable {
+        background-color: $thing-clickable-bg-color;
+    }
+
+    &-clicked {
+        background-color: $thing-clicked-bg-color;
+        transition: background-color 0s;
+    }
+
+    &-missed {
+        background-color: $thing-missed-bg-color;
+        transition: background-color 0s;
     }
 }

@@ -8,6 +8,8 @@
 
         this.activate(false);
 
+        this.state = Thing.State.NONE;
+
         if (parentElment) {
             parentElment.appendChild(this.element);
         }
@@ -16,6 +18,12 @@
     };
 
     Thing.MAX_NUMBER = 64;
+
+    Thing.State = {
+        NONE: 0,
+        STARTING_ANIMATION: 1,
+        ANIMATING: 2
+    };
 
     Thing.pool = [];
 
@@ -40,10 +48,70 @@
         return null;
     };
 
-    Thing.prototype.setPosition = function(x, y) {
+    Thing.tick = function() {
+        var poolLength = Thing.pool.length;
+        for (var i = 0; i < poolLength; i++) {
+            var thing = Thing.pool[i];
+            if (thing.isActive) {
+                thing.tick.bind(thing)();
+            }
+        }
+    };
+
+    Thing.prototype.tick = function() {
+        if (this.state === Thing.State.STARTING_ANIMATION) {
+            this.setPosition(this.endX, this.endY, this.endZ, true);
+
+            this.state = Thing.State.ANIMATING;
+        }
+    };
+
+    Thing.prototype.setPosition = function(x, y, z, enableAnimation) {
         var style = this.element.style;
-        style.left = x + 'px';
-        style.top = y + 'px';
+
+        if (enableAnimation !== undefined) {
+            style.webkitTransitionProperty = enableAnimation ? 'all' : 'none';
+        }
+
+        var value = 'translate3d(' + x + 'px, ' + y + 'px, ' + z + 'px)';
+        style.webkitTransform = value;
+    };
+
+    Thing.prototype.startAnimation = function(startX, startY, startZ, endX, endY, endZ, callback) {
+        this.setPosition(startX, startY, startZ, false);
+
+        this.endX = endX;
+        this.endY = endY;
+        this.endZ = endZ;
+
+        this.state = Thing.State.STARTING_ANIMATION;
+
+        var self = this;
+        this.element.addEventListener('webkitTransitionEnd', function () {
+            self.state = Thing.State.NONE;
+
+            if (callback) {
+                callback();
+            }
+        });
+    };
+
+    Thing.prototype.enableClick = function(clickable) {
+        var element = this.element;
+        if (clickable) {
+            element.classList.add('thing-clickable');
+
+            element.addEventListener('click', function () {
+                element.classList.remove('thing-clickable');
+                element.classList.add('thing-clicked');
+            });
+        } else {
+            element.classList.remove('thing-clickable');
+
+            element.addEventListener('click', function () {
+                element.classList.add('thing-missed');
+            });
+        }
     };
 
     window.Thing = Thing;
