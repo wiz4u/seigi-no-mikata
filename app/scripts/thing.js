@@ -96,6 +96,14 @@
         });
     };
 
+    Thing.prototype.enableClick = function(flag) {
+        if (flag) {
+            this.element.classList.add('thing-clickable');
+        } else {
+            this.element.classList.remove('thing-clickable');
+        }
+    };
+
     window.Thing = Thing;
 
 })(document, window);

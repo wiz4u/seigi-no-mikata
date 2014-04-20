@@ -24,6 +24,8 @@
     Main.fieldWidth = null;
     Main.fieldHeight = null;
 
+    Main.clickablePercentage = 0.2;
+
     Main.tick = function (time) {
         Thing.tick();
 
@@ -41,6 +43,10 @@
     };
 
     Main.startAnimation = function (thing, time) {
+        if (Math.random() < Main.clickablePercentage) {
+            thing.enableClick(true);
+        }
+
         var x = ((time & 1) ? 0.3 : 0.7) * Main.fieldWidth;
         var y = 40;
         var z = 0;

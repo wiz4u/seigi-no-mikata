@@ -4,6 +4,7 @@ $bg-color: #333;
 $thing-width: 64px;
 $thing-height: 64px;
 $thing-bg-color: #0f0;
+$thing-clickable-bg-color: #f00;
 $thing-border-color: #000;
 
 
@@ -35,5 +36,9 @@ $thing-border-color: #000;
 
     &-invisible {
         visibility: hidden;
+    }
+
+    &-clickable {
+        background-color: $thing-clickable-bg-color;
     }
 }
