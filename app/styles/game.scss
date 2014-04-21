@@ -9,18 +9,49 @@ $thing-clicked-bg-color: #0ff;
 $thing-missed-bg-color: #ff0;
 $thing-border-color: #000;
 
+html, body {
+    height: 100%;
+}
+
+body {
+    padding: 10px 0;
+}
+
+.header {
+    border: none;
+}
+
+.footer {
+    position: absolute;
+    bottom: 10px;
+    padding-top: 10px;
+
+    border: none;
+}
+
+#base {
+    width: 100%;
+    height: 100%;
+    max-width: 360px;
+    max-height: 567px;
+    padding: 0;
+}
 
 #field {
-    width: 480px;
-    height: 640px;
+    width: 100%;
+    height: 100%;
+    max-width: 360px;
+    max-height: 567px;
 
-    position: relative;
+    position: absolute;
+    top: 0;
+    z-index: -1;
 
     background-color: $bg-color;
 
     transform-style: preserve-3d;
     perspective: 1000px;
-    perspective-origin: 50% -50%;
+    perspective-origin: 50% 80%;
 }
 
 .thing {
