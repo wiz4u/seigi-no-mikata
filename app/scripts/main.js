@@ -20,6 +20,8 @@
     Main.DURATION = 100;
     Main.durationIndex = null;
 
+    Main.DELTA_X = 0.36;
+
     Main.field = null;
     Main.fieldWidth = null;
     Main.fieldHeight = null;
@@ -42,12 +44,13 @@
         window.requestAnimationFrame(Main.tick);
     };
 
+
     Main.startAnimation = function (thing, time) {
         var clickable = Math.random() < Main.clickablePercentage;
         thing.enableClick(clickable);
 
-        var x = ((time & 1) ? 0.3 : 0.7) * Main.fieldWidth;
-        var y = 40;
+        var x = ((time & 1) ? Main.DELTA_X : (1 - Main.DELTA_X)) * Main.fieldWidth;
+        var y = Main.fieldHeight * 0.75;
         var z = 0;
         thing.startAnimation(x, y, z, x, y, z + 1000, function () {
             // thing.activate(false);
