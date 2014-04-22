@@ -4,17 +4,25 @@
     'use strict';
 
     var Main = function () {
-        // console.log('Main()');
+        Main.state = Main.State.NOT_STARTED;
 
         Main.field = document.getElementById('field');
         Main.fieldWidth = Main.field.offsetWidth;
         Main.fieldHeight = Main.field.offsetHeight;
 
+        Main.startButton = document.getElementById('startButton');
+        Main.startButton.addEventListener('click', function () {
+            Main.start();
+        });
+
         for (var i = 0; i < Thing.MAX_NUMBER; i++) {
             new Thing(Main.field);
         }
+    };
 
-        Main.tick(0);
+    Main.State = {
+        NOT_STARTED: 0,
+        PLAYING: 1
     };
 
     Main.DURATION = 100;
@@ -25,10 +33,30 @@
     Main.field = null;
     Main.fieldWidth = null;
     Main.fieldHeight = null;
+    Main.startButton = null;
+
+    Main.state = null;
 
     Main.clickablePercentage = 0.2;
 
+    Main.start = function () {
+        if (Main.state === Main.State.NOT_STARTED) {
+            Main.state = Main.State.PLAYING;
+            Main.tick(0);
+
+            Main.startButton.innerText = 'Stop';
+        } else {
+            Main.state = Main.State.NOT_STARTED;
+
+            Main.startButton.innerText = 'Start';
+        }
+    };
+
     Main.tick = function (time) {
+        if (Main.state !== Main.State.PLAYING) {
+            return;
+        }
+
         Thing.tick();
 
         var t = Math.floor(time / Main.DURATION);
@@ -44,7 +72,6 @@
         window.requestAnimationFrame(Main.tick);
     };
 
-
     Main.startAnimation = function (thing, time) {
         var clickable = Math.random() < Main.clickablePercentage;
         thing.enableClick(clickable);
@@ -53,7 +80,7 @@
         var y = Main.fieldHeight * 0.75;
         var z = 0;
         thing.startAnimation(x, y, z, x, y, z + 1000, function () {
-            // thing.activate(false);
+            thing.activate(false);
         });
 
         thing.activate(true);
