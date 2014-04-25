@@ -73,8 +73,8 @@
     };
 
     Main.startAnimation = function (thing, time) {
-        var clickable = Math.random() < Main.clickablePercentage;
-        thing.enableClick(clickable);
+        var type = Math.random() < Main.clickablePercentage ? Thing.Type.GOOD : Thing.Type.BAD;
+        thing.setType(type);
 
         var x = ((time & 1) ? Main.DELTA_X : (1 - Main.DELTA_X)) * Main.fieldWidth;
         var y = Main.fieldHeight * 0.75;
