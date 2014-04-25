@@ -7,8 +7,9 @@
         this.element = element;
 
         this.activate(false);
-
         this.state = Thing.State.NONE;
+        this.setType(Thing.Type.GOOD);
+        this.setEventListener();
 
         if (parentElment) {
             parentElment.appendChild(this.element);
@@ -23,6 +24,11 @@
         NONE: 0,
         STARTING_ANIMATION: 1,
         ANIMATING: 2
+    };
+
+    Thing.Type = {
+        GOOD: 0,
+        BAD: 1
     };
 
     Thing.pool = [];
@@ -46,6 +52,28 @@
         }
 
         return null;
+    };
+
+    Thing.prototype.setType = function(type) {
+        this.type = type;
+
+        if (type === Thing.Type.GOOD) {
+            this.element.classList.add('thing-clickable');
+        } else {
+            this.element.classList.remove('thing-clickable');
+        }
+    };
+
+    Thing.prototype.setEventListener = function() {
+        var self = this;
+        this.element.addEventListener('click', function () {
+            if (self.type === Thing.Type.GOOD) {
+                self.element.classList.remove('thing-clickable');
+                self.element.classList.add('thing-clicked');
+            } else {
+                self.element.classList.add('thing-missed');
+            }
+        });
     };
 
     Thing.tick = function() {
@@ -94,24 +122,6 @@
                 callback();
             }
         });
-    };
-
-    Thing.prototype.enableClick = function(clickable) {
-        var element = this.element;
-        if (clickable) {
-            element.classList.add('thing-clickable');
-
-            element.addEventListener('click', function () {
-                element.classList.remove('thing-clickable');
-                element.classList.add('thing-clicked');
-            });
-        } else {
-            element.classList.remove('thing-clickable');
-
-            element.addEventListener('click', function () {
-                element.classList.add('thing-missed');
-            });
-        }
     };
 
     window.Thing = Thing;
