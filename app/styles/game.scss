@@ -19,6 +19,10 @@ body {
 
 .header {
     border: none;
+
+    * {
+        z-index: 10;
+    }
 }
 
 .footer {
@@ -27,6 +31,8 @@ body {
     padding-top: 10px;
 
     border: none;
+
+    z-index: 10;
 }
 
 #base {
@@ -45,7 +51,7 @@ body {
 
     position: absolute;
     top: 0;
-    z-index: -1;
+    z-index: 5;
 
     background-color: $bg-color;
 
@@ -61,6 +67,7 @@ body {
     position: absolute;
     top: -($thing-width / 2);
     left: -($thing-height / 2);
+    z-index: 5;
 
     background-color: $thing-bg-color;
     border: solid 1px $thing-border-color;
